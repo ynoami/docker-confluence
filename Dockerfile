@@ -11,20 +11,20 @@ RUN echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-sel
 RUN apt-get install -y oracle-java7-installer 
 
 RUN apt-get install -y wget
-RUN wget https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.7.tar.gz
+RUN wget https://www.atlassian.com/software/confluence/downloads/binary/atlassian-confluence-5.9.10.tar.gz
 
 RUN mkdir -p /opt/atlassian
-RUN tar -zxvf atlassian-confluence-5.7.tar.gz -C /opt/atlassian
-RUN rm atlassian-confluence-5.7.tar.gz
+RUN tar -zxvf atlassian-confluence-5.9.10.tar.gz -C /opt/atlassian
+RUN rm atlassian-confluence-5.9.10.tar.gz
 
 RUN useradd --create-home --comment "Account for running Confluence" --shell /bin/bash confadmin
 
-RUN chown -R confadmin /opt/atlassian/atlassian-confluence-5.7/
-RUN chgrp -R confadmin /opt/atlassian/atlassian-confluence-5.7/
+RUN chown -R confadmin /opt/atlassian/atlassian-confluence-5.9.10/
+RUN chgrp -R confadmin /opt/atlassian/atlassian-confluence-5.9.10/
 
-RUN echo -e "\nconfluence.home=/var/atlassian/application-data/confluence" >> /opt/atlassian/atlassian-confluence-5.7/confluence/WEB-INF/classes/confluence-init.properties
+RUN echo -e "\nconfluence.home=/var/atlassian/application-data/confluence" >> /opt/atlassian/atlassian-confluence-5.9.10/confluence/WEB-INF/classes/confluence-init.properties
 
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle
 ENV CONF_USER confadmin
 
-ENTRYPOINT ["/opt/atlassian/atlassian-confluence-5.7/bin/start-confluence.sh", "-fg"]
+ENTRYPOINT ["/opt/atlassian/atlassian-confluence-5.9.10/bin/start-confluence.sh", "-fg"]
